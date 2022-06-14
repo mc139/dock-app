@@ -1,0 +1,18 @@
+package com.dock.dockapp.repository;
+
+import com.dock.dockapp.model.Boat;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
+@Repository
+public interface BoatRepo extends JpaRepository<Boat, Long> {
+
+    @Transactional
+    @Modifying
+    @Query(value = "update boat set dock_id = ?1 where id = ?2", nativeQuery = true)
+    void updateDock(Long dockId, Long boatId);
+
+}
