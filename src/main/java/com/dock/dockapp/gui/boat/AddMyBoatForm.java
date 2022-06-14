@@ -36,15 +36,25 @@ public class AddMyBoatForm extends FormLayout {
 
     public AddMyBoatForm(MyBoatsViewGui myBoatsViewGui, BoatService boatService) {
         this.myBoatsViewGui = myBoatsViewGui;
-
         this.boatService = BoatServiceBean.getBoatService();
         setSizeUndefined();
+        configureButtons();
+        configureBoatBinder();
+        cofigureSave();
+        configureDelete();
+    }
+
+    private void configureButtons() {
         HorizontalLayout buttons = new HorizontalLayout(save, delete, cancel);
         add(name, volume, regNo, size, buttons);
         size.setItems(BoatSize.values());
-        configureBoatBinder();
-        boatBinder.addValueChangeListener(e -> boatBinder.setBean(boat));
+    }
 
+    private void configureDelete() {
+        delete.addClickListener(e -> delete());
+    }
+
+    private void cofigureSave() {
         save.addClickListener(e -> {
             try {
                 save();
@@ -52,9 +62,7 @@ public class AddMyBoatForm extends FormLayout {
                 ex.printStackTrace();
             }
         });
-        delete.addClickListener(e -> delete());
     }
-
 
     private void configureBoatBinder() {
         boatBinder.forField(volume)
@@ -64,7 +72,7 @@ public class AddMyBoatForm extends FormLayout {
                 .withConverter(new StringToIntegerConverter("It must be a number!"))
                 .bind(Boat::getRegNo, Boat::setRegNo);
         boatBinder.bindInstanceFields(this);
-
+        boatBinder.addValueChangeListener(e -> boatBinder.setBean(boat));
         boatBinder.setBean(this.boat);
 
     }
@@ -80,18 +88,12 @@ public class AddMyBoatForm extends FormLayout {
     }
 
     public void save() throws ValidationException {
-
         Optional.ofNullable(boat).ifPresent(action -> myBoatsViewGui.getBoatService().save(boat));
-
-
     }
 
     @SneakyThrows
     private void validateAndSave() {
-//        setBoat(boatBinder.getBean());
-        System.out.println(boat);
         boatBinder.writeBean(boat);
         boatService.save(boat);
-
     }
 }

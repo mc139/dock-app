@@ -28,11 +28,22 @@ public class AddDockForm extends FormLayout {
         this.dockService = dockService;
         this.dockViewGui = dockViewGui;
         configureDockBinder();
-        dockBinder.addValueChangeListener(event -> dockBinder.setBean(dock));
         setSizeUndefined();
+        configureButtons();
+        configureSave();
+        configureDelete();
+    }
+
+    private void configureButtons() {
         HorizontalLayout buttons = new HorizontalLayout(save, cancel);
         add(name, capacity, buttons);
+    }
 
+    private void configureDelete() {
+        delete.addClickListener(e -> delete());
+    }
+
+    private void configureSave() {
         save.addClickListener(e -> {
             try {
                 save();
@@ -40,7 +51,6 @@ public class AddDockForm extends FormLayout {
                 ex.printStackTrace();
             }
         });
-        delete.addClickListener(e -> delete());
     }
 
     private void delete() {
@@ -63,6 +73,7 @@ public class AddDockForm extends FormLayout {
                 .withConverter(new StringToDoubleConverter("It must be a number!"))
                 .bind(Dock::getCapacity, Dock::setCapacity);
         dockBinder.setBean(this.dock);
+        dockBinder.addValueChangeListener(event -> dockBinder.setBean(dock));
     }
 
 

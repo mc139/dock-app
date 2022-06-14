@@ -26,12 +26,9 @@ public class MyBoatsViewGui extends VerticalLayout {
     @Autowired
     public MyBoatsViewGui(BoatService boatService, TopBarGui topBar) {
         this.boatService = boatService;
-
         setSizeFull();
         configureGrid();
-
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
         String currentPrincipalName = authentication.getName();
         grid.setItems(boatService.findAllByUserName(currentPrincipalName));
         HorizontalLayout layout = new HorizontalLayout(grid, this.form);
@@ -54,13 +51,11 @@ public class MyBoatsViewGui extends VerticalLayout {
     private void configureGrid() {
         grid.addClassNames("my-boats-grid");
         grid.setSizeFull();
-
         grid.removeAllColumns();
         grid.addColumn(Boat::getName).setHeader("NAME");
         grid.addColumn(Boat::getRegNo).setHeader("REGISTRATION NUMBER");
         grid.addColumn(Boat::getVolume).setHeader("VOLUME");
         grid.addColumn(Boat::getDockName).setHeader("DOCK NAME");
-
         grid.getColumns().forEach(col -> col.setAutoWidth(true));
     }
 }

@@ -16,8 +16,6 @@ import com.vaadin.flow.spring.annotation.UIScope;
 
 import java.util.Optional;
 
-
-//@SpringComponent
 @UIScope
 public class AddBoatForm extends FormLayout {
 
@@ -33,17 +31,28 @@ public class AddBoatForm extends FormLayout {
     private BoatService boatService;
     private Boat boat = new Boat();
 
-    //    @Autowired
     public AddBoatForm(BoatsViewGui boatsViewGui, BoatService boatService) {
         this.boatsViewGui = boatsViewGui;
         this.boatService = BoatServiceBean.getBoatService();
         setSizeUndefined();
-        HorizontalLayout buttons = new HorizontalLayout(save, delete, cancel);
-        add(name, volume, regNo, size, buttons);
-        size.setItems(BoatSize.values());
+        configureButtons();
         configureBoatBinder();
-        boatBinder.addValueChangeListener(e -> boatBinder.setBean(boat));
+        cofigureSave();
+        configureDelete();
+        this.boatService = boatService;
+    }
 
+    private void configureButtons() {
+        HorizontalLayout buttons = new HorizontalLayout(save, delete, cancel);
+        size.setItems(BoatSize.values());
+        add(name, volume, regNo, size, buttons);
+    }
+
+    private void configureDelete() {
+        delete.addClickListener(e -> delete());
+    }
+
+    private void cofigureSave() {
         save.addClickListener(e -> {
             try {
                 save();
@@ -51,8 +60,6 @@ public class AddBoatForm extends FormLayout {
                 ex.printStackTrace();
             }
         });
-        delete.addClickListener(e -> delete());
-        this.boatService = boatService;
     }
 
 
@@ -66,7 +73,7 @@ public class AddBoatForm extends FormLayout {
         boatBinder.bindInstanceFields(this);
 
         boatBinder.setBean(this.boat);
-
+        boatBinder.addValueChangeListener(e -> boatBinder.setBean(boat));
     }
 
     public void setBoat(Boat boat) {

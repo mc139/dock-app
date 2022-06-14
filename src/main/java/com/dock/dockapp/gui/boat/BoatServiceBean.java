@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class BoatServiceBean {
 
-
     private static BoatService boatService;
 
     public static BoatService getBoatService() {

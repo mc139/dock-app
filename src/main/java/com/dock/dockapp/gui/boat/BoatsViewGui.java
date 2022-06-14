@@ -29,7 +29,6 @@ public class BoatsViewGui extends VerticalLayout {
         this.boatService = boatService;
         setSizeFull();
         configureGrid();
-
         grid.setItems(boatService.findAll());
         HorizontalLayout layout = new HorizontalLayout(grid, form);
         add(topBarGui, getContent());

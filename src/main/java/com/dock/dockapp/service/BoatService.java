@@ -28,7 +28,6 @@ public class BoatService {
         this.dockUserService = dockUserService;
     }
 
-
     public List<Boat> findAllByUserName(String userName) {
         return Optional.of(boatRepo.findAll()).orElse(Collections.emptyList()).stream()
                 .filter(Objects::nonNull)

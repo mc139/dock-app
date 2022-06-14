@@ -27,7 +27,6 @@ public class DockViewGui extends VerticalLayout {
         setSizeFull();
         configureGrid();
         getContent();
-        grid.setItems(dockService.findAll());
         add(topBarGui, getContent());
     }
 
@@ -38,20 +37,18 @@ public class DockViewGui extends VerticalLayout {
         content.addClassName("content");
         content.setSizeFull();
         return content;
-
     }
 
     private void configureGrid() {
         grid.addClassNames("boats-grid");
         grid.setSizeFull();
-
         grid.removeAllColumns();
         grid.addColumn(Dock::getName).setHeader("DOCK NAME");
         grid.addColumn(Dock::getNumberOfDockBoats).setHeader("Number of boats");
         grid.addColumn(Dock::getCapacityAsString).setHeader("Total capacity");
         grid.addColumn(Dock::getCapacityLeftAsString).setHeader("Capacity left");
-
         grid.getColumns().forEach(col -> col.setAutoWidth(true));
+        grid.setItems(dockService.findAll());
     }
 
     public DockService getDockService() {

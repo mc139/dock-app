@@ -21,26 +21,21 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Locale;
 
-//@Component
 @SpringComponent
 @UIScope
-//@ComponentScan("com.dock.dockapp.service")
 public class AddReservationForm extends FormLayout {
 
     private final DockReservationService dockReservationService;
-    Locale finnishLocale = new Locale("ENG", "UK");
+
     DatePicker datePickerFrom = new DatePicker("Select a date:");
     DatePicker datePickerTo = new DatePicker("Select a date:");
     private Button save = new Button("SAVE");
-    //    private ReservationViewGui reservationViewGui;
     private DockService dockService;
     private BoatService boatService;
     private ComboBox<Dock> docks = new ComboBox<>("Dock");
     private ComboBox<Boat> boats = new ComboBox<>("Boat");
-    //    private Binder<Boat> boatBinder = new Binder<>(Boat.class);
-//    private Binder<Dock> dockBinder = new Binder<>(Dock.class);
+
     private Dock dock = new Dock();
     private Boat boat = new Boat();
     private DockReservation dockReservation = new DockReservation();
@@ -52,24 +47,29 @@ public class AddReservationForm extends FormLayout {
         this.dockReservationService = dockReservationService;
         this.dockService = dockService;
         this.boatService = boatService;
-//        NullValidator nv = new NullValidator("Cannot be null", false);
-        docks.getElement().setAttribute("required", true);
-
-//        docks.getElement().
-//        docks.getElement().setProperty("required",true);
-
         setSizeUndefined();
         HorizontalLayout buttons = new HorizontalLayout(save);
         datePickerFrom.setMin(LocalDate.now());
         add(docks, boats, datePickerFrom, datePickerTo, buttons);
-        List<Dock> all = dockService.findAll();
+        configureDocks(dockService);
+        configureBoats(boatService);
+        configureSave();
 
+    }
+
+    private void configureDocks(DockService dockService) {
+        List<Dock> all = dockService.findAll();
         docks.setItems(all);
+        docks.getElement().setAttribute("required", true);
+    }
+
+    private void configureBoats(BoatService boatService) {
         List<Boat> allBoats = boatService.findAll();
         boats.setItems(allBoats);
+    }
 
+    private void configureSave() {
         save.addClickListener(e -> save());
-
     }
 
     public void save() {
@@ -82,11 +82,6 @@ public class AddReservationForm extends FormLayout {
         } else {
             Notification.show("Please provide all the details!").setPosition(Notification.Position.MIDDLE);
         }
-
-    }
-
-    public void configureBinders() {
-//         dockReservationBinder.forField(dock).bind(DockReservation::getDock,DockReservation::setDock);
 
     }
 
