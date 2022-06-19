@@ -36,8 +36,8 @@ public class ApplicationInitializationUtil {
         boatService.save(new Boat("TEST BOAT#2", 31223.0, 21));
         boatService.save(new Boat("TEST BOAT#3", 31223, 22));
         boatService.save(new Boat("TEST BOAT#4", 31223, 23));
-        boatService. save(new Boat("TEST BOAT#5", 31223, 24));
-        boatService. save(new Boat("TEST BOAT#6", 31223, 25));
+        boatService.save(new Boat("TEST BOAT#5", 31223, 24));
+        boatService.save(new Boat("TEST BOAT#6", 31223, 25));
 
         Dock dock_with_reservation = new Dock(15000.0, "dock with boat reservation");
         Boat reserved_boat = new Boat("reserved boat", 1000.0, 999);

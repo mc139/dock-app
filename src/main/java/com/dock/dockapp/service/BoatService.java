@@ -2,14 +2,13 @@ package com.dock.dockapp.service;
 
 import com.dock.dockapp.exception.BoatNotFoundException;
 import com.dock.dockapp.model.Boat;
-import com.dock.dockapp.model.Dock;
 import com.dock.dockapp.repository.BoatRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.event.ApplicationReadyEvent;
-import org.springframework.context.event.EventListener;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collections;
 import java.util.List;
@@ -45,11 +44,12 @@ public class BoatService {
         return (List<Boat>) boatRepo.findAll();
     }
 
+//    @Transactional
+    @Transactional(propagation= Propagation.REQUIRES_NEW, readOnly=false)
     public Boat save(Boat boat) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null) {
             boat.setOwner(dockUserService.findUserByUserName(authentication.getName()));
-
         }
         return boatRepo.save(boat);
     }

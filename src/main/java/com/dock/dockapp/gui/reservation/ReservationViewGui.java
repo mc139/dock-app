@@ -1,7 +1,6 @@
 package com.dock.dockapp.gui.reservation;
 
 import com.dock.dockapp.gui.boat.TopBarGui;
-import com.dock.dockapp.model.Dock;
 import com.dock.dockapp.model.DockReservation;
 import com.dock.dockapp.service.DockReservationService;
 import com.vaadin.flow.component.grid.Grid;
@@ -28,7 +27,7 @@ public class ReservationViewGui extends VerticalLayout {
         this.addReservationForm = addReservationForm;
         Grid<DockReservation> dockReservationGrid = getGrid(dockReservationService);
         setSizeFull();
-        add(topBarGui, addReservationForm,dockReservationGrid);
+        add(topBarGui, addReservationForm, dockReservationGrid);
     }
 
     private Grid<DockReservation> getGrid(DockReservationService dockReservationService) {

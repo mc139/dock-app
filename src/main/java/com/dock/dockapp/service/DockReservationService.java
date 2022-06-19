@@ -8,13 +8,9 @@ import com.dock.dockapp.repository.BoatRepo;
 import com.dock.dockapp.repository.DockRepo;
 import com.dock.dockapp.repository.DockReservationRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.event.ApplicationReadyEvent;
-import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.Date;
-import java.time.LocalDate;
 import java.util.List;
 
 

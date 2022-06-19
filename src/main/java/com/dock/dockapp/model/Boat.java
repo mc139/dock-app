@@ -17,12 +17,12 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Entity
 @SelectBeforeUpdate
-@DynamicUpdate
-public class Boat {
+//@DynamicUpdate
+public class Boat extends BaseEntity {
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id
-    private Long id;
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @Id
+//    private Long id;
     @NonNull
     private String name;
     @NonNull
@@ -38,6 +38,12 @@ public class Boat {
     private DockReservation reservation;
     @OneToOne
     private DockUser owner;
+
+    @Version()
+    @JsonIgnore
+    private long version = 0L;
+    @Id
+    private Long id;
 
     public String getDockName() {
         return Optional.ofNullable(dock)
@@ -56,5 +62,13 @@ public class Boat {
                 ", volume=" + volume +
                 ", regNo=" + regNo +
                 '}';
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
     }
 }
