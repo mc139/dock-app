@@ -44,13 +44,13 @@ public class DockService {
         dockRepo.deleteById(id);
     }
 
-    @EventListener(ApplicationReadyEvent.class)
-    public void fillDB() {
-        save(new Dock(1000000, "nasz pierwszy dock testowy"));
-        save(new Dock(1004320, "dock"));
-        save(new Dock(104300000, "dock"));
-        save(new Dock(100430000, "nasz czwarty dock testowy"));
-
-    }
+//    @EventListener(ApplicationReadyEvent.class)
+//    public void fillDB() {
+////        save(new Dock(1000000, "nasz pierwszy dock testowy"));
+////        save(new Dock(1004320, "dock"));
+////        save(new Dock(104300000, "dock"));
+////        save(new Dock(100430000, "nasz czwarty dock testowy"));
+//
+//    }
 
 }

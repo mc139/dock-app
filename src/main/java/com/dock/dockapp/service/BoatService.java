@@ -58,21 +58,4 @@ public class BoatService {
         boatRepo.deleteById(id);
     }
 
-    @EventListener(ApplicationReadyEvent.class)
-    public void fillDB() {
-
-        Boat statek_testow_zadokowany = new Boat("statek testow zadokowany", 2000, 22121);
-        statek_testow_zadokowany.setDock(new Dock(10000, "dockTestowy"));
-        statek_testow_zadokowany.setOwner(dockUserService.findUserByUserName("admin"));
-        save(statek_testow_zadokowany);
-        save(new Boat("statek testow9", 20000.0, 22121));
-        save(new Boat("Statek testowy1", 31223.0, 21));
-        save(new Boat("Statek testowy2", 31223, 22));
-        save(new Boat("Statek testowy3", 31223, 23));
-        save(new Boat("Statek testowy4", 31223, 24));
-        save(new Boat("Statek testowy5", 31223, 25));
-
-    }
-
-
 }

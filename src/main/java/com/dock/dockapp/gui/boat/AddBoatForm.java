@@ -90,5 +90,4 @@ public class AddBoatForm extends FormLayout {
         Optional.ofNullable(boat).ifPresent(action -> boatsViewGui.getBoatService().save(boat));
     }
 
-
 }
