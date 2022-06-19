@@ -1,8 +1,10 @@
 package com.dock.dockapp.model;
 
 
-
-import javax.persistence.*;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.UUID;
@@ -19,7 +21,7 @@ public class BaseEntity implements Serializable {
     public boolean equals(Object o) {
 
         return this == o || o instanceof BaseEntity
-                && Objects.equals(uuid,((BaseEntity) o).uuid);
+                && Objects.equals(uuid, ((BaseEntity) o).uuid);
     }
 
     @Override

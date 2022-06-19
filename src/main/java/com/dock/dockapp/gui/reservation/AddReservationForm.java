@@ -27,9 +27,10 @@ import java.util.List;
 public class AddReservationForm extends FormLayout {
 
     private final DockReservationService dockReservationService;
+//    private final ReservationViewGui reservationViewGui;
 
-    DatePicker datePickerFrom = new DatePicker("Select a date:");
-    DatePicker datePickerTo = new DatePicker("Select a date:");
+    private DatePicker datePickerFrom = new DatePicker("Select a date:");
+    private DatePicker datePickerTo = new DatePicker("Select a date:");
     private Button save = new Button("SAVE");
     private DockService dockService;
     private BoatService boatService;
@@ -79,6 +80,7 @@ public class AddReservationForm extends FormLayout {
                     , Date.valueOf(datePickerFrom.getValue())
                     , Date.valueOf(datePickerTo.getValue()));
             dockReservationService.save(dockReservation);
+//            reservationViewGui.getDockReservationGrid().getDataProvider().refreshAll();
         } else {
             Notification.show("Please provide all the details!").setPosition(Notification.Position.MIDDLE);
         }

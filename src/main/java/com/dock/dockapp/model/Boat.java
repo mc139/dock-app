@@ -3,7 +3,6 @@ package com.dock.dockapp.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.SelectBeforeUpdate;
 
 import javax.persistence.*;
@@ -20,7 +19,7 @@ import java.util.Optional;
 //@DynamicUpdate
 public class Boat extends BaseEntity {
 
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //    @GeneratedValue(strategy = GenerationType.IDENTITY)
 //    @Id
 //    private Long id;
     @NonNull
@@ -64,11 +63,11 @@ public class Boat extends BaseEntity {
                 '}';
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

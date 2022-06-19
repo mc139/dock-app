@@ -3,6 +3,7 @@ package com.dock.dockapp.gui.reservation;
 import com.dock.dockapp.gui.boat.TopBarGui;
 import com.dock.dockapp.model.DockReservation;
 import com.dock.dockapp.service.DockReservationService;
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
@@ -10,7 +11,6 @@ import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.vaadin.flow.spring.annotation.UIScope;
 import org.springframework.beans.factory.annotation.Autowired;
 
-//@Component
 @SpringComponent
 @UIScope
 @Route("gui/reservations")
@@ -27,7 +27,9 @@ public class ReservationViewGui extends VerticalLayout {
         this.addReservationForm = addReservationForm;
         Grid<DockReservation> dockReservationGrid = getGrid(dockReservationService);
         setSizeFull();
-        add(topBarGui, addReservationForm, dockReservationGrid);
+        Button refresh = new Button();
+        refresh.addClickListener(click -> dockReservationGrid.getDataProvider());
+        add(topBarGui, addReservationForm, dockReservationGrid, refresh);
     }
 
     private Grid<DockReservation> getGrid(DockReservationService dockReservationService) {

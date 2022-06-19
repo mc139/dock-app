@@ -44,8 +44,8 @@ public class BoatService {
         return (List<Boat>) boatRepo.findAll();
     }
 
-//    @Transactional
-    @Transactional(propagation= Propagation.REQUIRES_NEW, readOnly=false)
+    //    @Transactional
+    @Transactional(propagation = Propagation.REQUIRES_NEW, readOnly = false)
     public Boat save(Boat boat) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null) {
