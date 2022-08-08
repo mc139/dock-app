@@ -55,19 +55,4 @@ public class DockReservationService {
     }
 
 
-//    @EventListener(ApplicationReadyEvent.class)
-//    public void fillDB() throws InterruptedException {
-//        Thread.sleep(1000);
-//        Dock dock_with_reservation = new Dock(15000.0, "$$$$$$$");
-//        Boat reserved_boat = new Boat("reserved boat", 1000.0, 999);
-//        Dock dock_with_reservations = new Dock(888888, "Dock with multiple reservations");
-//        dockRepo.save(dock_with_reservations);
-//        boatRepo.save(reserved_boat);
-//        dockRepo.save(dock_with_reservation);
-//        save(new DockReservation(dock_with_reservation, reserved_boat
-//                , Date.valueOf(LocalDate.of(2020, 1, 1))
-//                , Date.valueOf(LocalDate.of(2023, 11, 11))));
-//
-//    }
-
 }
